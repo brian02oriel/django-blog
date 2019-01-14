@@ -4,4 +4,10 @@
         <meta charset="UTF-8">
         <title>Home</title>
     </head>
+    <body>
+        <h1>Users Comments</h1>
+        {% for comment in comments %}
+            <h2> {{ comment.fullname }} </h2>
+        {% endfor %}
+    </body>
 </html>
