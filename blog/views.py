@@ -15,19 +15,9 @@ def home(request):
     
     #Selecciona los datos para mostrarlos en pantalla
     comments = Users.objects.all()
-    for comment in comments:
-        fullname = comment.fullname
-        email = comment.email
-        message = comment.message
-        pub_date = comment.pub_date
-
-    context = {
-        "fullname":fullname,
-        "email":email,
-        "message":message,
-        "pub_date":pub_date
-    }
-    return render(request, 'blog/home.html', context)
+   
+    #print(comments)
+    return render(request, 'blog/home.html', {"data":comments})
 
 def contact(request):
     #Inserta los datos del formulario en la db

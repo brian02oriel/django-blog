@@ -6,8 +6,11 @@
     </head>
     <body>
         <h1>Users Comments</h1>
-        {% for comment in comments %}
-            <h2> {{ comment.fullname }} </h2>
-        {% endfor %}
+    {% for val in data %}
+        <h2>{{ val.fullname }}</h2>
+        <h3> {{ val.email }} </h3>
+        <p> {{ val.message }}</p>
+        <p> {{ val.pub_date }}</p>
+    {% endfor%}
     </body>
 </html>
