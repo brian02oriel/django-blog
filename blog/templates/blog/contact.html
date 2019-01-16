@@ -5,7 +5,7 @@
         <title>Contact</title>
     </head>
     <body>
-        <form method="POST" action = "{% url 'blog:home' %}">
+        <form method="POST" action = "{% url 'blog:contact' %}">
            
             {% csrf_token %}
             {{ form.as_p }}
