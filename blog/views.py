@@ -3,13 +3,27 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.utils import timezone
 from django.urls import reverse
+from django.contrib.auth import authenticate, login
 
 from .models import Users
-from .forms import ContactForm
+from .forms import ContactForm, LoginForm
 # Create your views here.
 
 def index(request):
-    return render(request, 'blog/index.html')
+    loginform = LoginForm(request.POST)
+    if request.method == 'POST':
+        if loginform.is_valid():
+            data = loginform.cleaned_data
+            username = data.get("username")
+            password = data.get("password")
+            access = authenticate(username = username, password = password)
+            if access is not None:
+                login(request, access)
+                return HttpResponse("Bienvenido {}".format(username))
+            else:
+                return HttpResponse("Incorrect Username or Password")
+
+    return render(request, 'blog/index.html', {"form": loginform})
 
 def home(request):
     

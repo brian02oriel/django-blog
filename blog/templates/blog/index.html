@@ -4,4 +4,13 @@
         <meta charset="UTF-8">
         <title>Index</title>
     </head>
+    <body>
+        <h1>Login</h1>
+        <form method="POST" action = "{% url 'blog:index' %}">
+           
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Send">
+        </form>
+    </body>
 </html>
