@@ -4,6 +4,7 @@ from django.template import loader
 from django.utils import timezone
 from django.urls import reverse
 from django.contrib.auth import authenticate, login
+from django.views.generic import ListView
 
 from .models import Users
 from .forms import ContactForm, LoginForm
@@ -19,19 +20,19 @@ def index(request):
             access = authenticate(username = username, password = password)
             if access is not None:
                 login(request, access)
-                return HttpResponse("Bienvenido {}".format(username))
+                return HttpResponseRedirect(reverse('blog:home'), {"username": username})
             else:
                 return HttpResponse("Incorrect Username or Password")
 
     return render(request, 'blog/index.html', {"form": loginform})
 
-def home(request):
-    
-    #Selecciona los datos para mostrarlos en pantalla
-    comments = Users.objects.all()
-   
-    #print(comments)
-    return render(request, 'blog/home.html', {"data":comments})
+
+
+class HomeView(ListView):
+    model = Users
+    template_name = "blog/home.html"
+ 
+
 
 def contact(request):
     #Inserta los datos del formulario en la db

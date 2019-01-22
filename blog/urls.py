@@ -6,5 +6,5 @@ app_name = 'blog'
 urlpatterns = [
      path('', views.index, name = 'index'),
      path('contact',views.contact, name = 'contact' ),
-     path('home',views.home, name = 'home' ),
+     path('home',views.HomeView.as_view(), name = 'home' ),
 ]
