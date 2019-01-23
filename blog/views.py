@@ -20,7 +20,7 @@ def index(request):
             access = authenticate(username = username, password = password)
             if access is not None:
                 login(request, access)
-                return HttpResponseRedirect(reverse('blog:home'), {"username": username})
+                return HttpResponseRedirect(reverse('blog:home'))
             else:
                 return HttpResponse("Incorrect Username or Password")
 
@@ -31,7 +31,6 @@ def index(request):
 class HomeView(ListView):
     model = Users
     template_name = "blog/home.html"
- 
 
 
 def contact(request):
